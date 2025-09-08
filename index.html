@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kowshal Sugunarajah • QA Tester & Cloud Student</title>
+  <meta name="description" content="Portfolio & resume website for Kowshal Sugunarajah — Software QA Tester with Amazon experience; Selenium (Python), API automation, SQL; Cloud student at Durham College (AWS, Azure, GCP)." />
+  <meta name="author" content="Kowshal Sugunarajah" />
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --panel: #111318;
+      --muted: #a0a8b3;
+      --text: #e9edf1;
+      --accent: #6366f1; /* indigo */
+      --accent-2: #22c55e; /* green */
+      --ring: rgba(99,102,241,.35);
+      --border: #1e2230;
+      --card: #0f1117;
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    [data-theme="light"] {
+      --bg: #f7f8fb;
+      --panel: #ffffff;
+      --muted: #475569;
+      --text: #0f172a;
+      --accent: #4f46e5;
+      --accent-2: #16a34a;
+      --ring: rgba(79,70,229,.35);
+      --border: #e5e7eb;
+      --card: #ffffff;
+      --shadow: 0 10px 25px rgba(2, 6, 23, .08);
+    }
+
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(99,102,241,0.08), transparent 50%),
+                  radial-gradient(900px 500px at 10% -20%, rgba(34,197,94,0.08), transparent 40%),
+                  var(--bg);
+      line-height: 1.6;
+    }
+
+    /* Layout */
+    .container {
+      width: min(1100px, 92vw);
+      margin-inline: auto;
+    }
+
+    header.site-header {
+      position: sticky;
+      top: 0; z-index: 50;
+      backdrop-filter: saturate(150%) blur(8px);
+      background: color-mix(in oklab, var(--bg) 80%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; height: 64px;
+    }
+    .brand { display:flex; gap:.75rem; align-items:center; font-weight: 700; letter-spacing:.2px; }
+    .brand .dot { width:10px; height:10px; border-radius:999px; background: var(--accent); box-shadow: 0 0 0 6px var(--ring); }
+    .nav a { color: var(--text); text-decoration: none; font-weight: 600; opacity:.88; }
+    .nav a:hover { opacity: 1; }
+    .nav .links { display:flex; gap:1rem; align-items:center; }
+
+    .btn, button.btn {
+      display:inline-flex; align-items:center; gap:.5rem;
+      background: var(--accent);
+      color: white; border: 0; border-radius: 999px; padding: .6rem 1rem; font-weight:700;
+      box-shadow: 0 6px 14px var(--ring); transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+      cursor:pointer; text-decoration:none;
+    }
+    .btn.secondary { background: var(--panel); color: var(--text); border:1px solid var(--border); box-shadow: var(--shadow); }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+
+    /* Hero */
+    .hero {
+      padding: 64px 0 36px;
+    }
+    .hero-card {
+      background: linear-gradient(180deg, color-mix(in oklab, var(--card) 90%, transparent), var(--card));
+      border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px; box-shadow: var(--shadow);
+      display:grid; grid-template-columns: 1fr; gap: 18px;
+    }
+    .headline { font-size: clamp(28px, 3.2vw, 40px); line-height:1.2; margin:0; }
+    .sub { color: var(--muted); margin: 6px 0 0; font-size: 1.05rem; }
+    .chipbar { display:flex; flex-wrap: wrap; gap:.5rem; margin-top: .75rem; }
+    .chip {
+      background: color-mix(in oklab, var(--accent) 12%, transparent);
+      border: 1px dashed color-mix(in oklab, var(--accent) 40%, var(--border));
+      color: color-mix(in oklab, var(--text) 92%, white);
+      padding:.35rem .6rem; border-radius: 999px; font-size: .85rem; font-weight: 700;
+    }
+
+    .contact {
+      display:flex; flex-wrap:wrap; gap: .75rem 1.25rem; margin-top: 10px; align-items:center;
+      color: var(--muted);
+    }
+    .contact a { color: inherit; text-decoration:none; border-bottom:1px dashed color-mix(in oklab, var(--muted) 60%, transparent); }
+    .contact svg { width: 18px; height: 18px; }
+
+    /* Sections */
+    section { padding: 30px 0; }
+    h2.section-title { font-size: clamp(22px, 2.4vw, 28px); margin: 0 0 14px; letter-spacing: .3px; }
+
+    .grid {
+      display:grid; gap: 16px;
+    }
+    @media (min-width: 860px) {
+      .grid.two { grid-template-columns: 1fr 1fr; }
+      .hero-card { grid-template-columns: 2.2fr 1.2fr; align-items:center; }
+    }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 18px; box-shadow: var(--shadow);
+    }
+    .card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+    .meta { color: var(--muted); font-size: .95rem; }
+    .list { margin: 10px 0 0 0; padding-left: 18px; }
+    .list li { margin: .3rem 0; }
+
+    .skillgrid { display:grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .skillgrid .skill { background: var(--panel); border:1px dashed var(--border); border-radius: 12px; padding: 12px; }
+    .skillgrid h4 { margin: 0 0 6px; font-size: .95rem; color: var(--muted); text-transform: uppercase; letter-spacing:.6px; }
+
+    /* Footer */
+    footer { padding: 28px 0 36px; color: var(--muted); }
+
+    /* Anchors */
+    .anchor { scroll-margin-top: 90px; }
+
+    /* Print */
+    @media print {
+      header.site-header, .btn, .nav { display: none !important; }
+      body { background: white; }
+      .card, .hero-card { box-shadow: none; border: 1px solid #ddd; }
+      a::after { content: " (" attr(href) ")"; font-size: .85em; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand" title="Kowshal Sugunarajah">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Kowshal Sugunarajah</span>
+      </div>
+      <nav aria-label="Primary">
+        <div class="links">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#education">Education</a>
+          <a href="#awards">Awards</a>
+          <a href="#contact">Contact</a>
+          <button class="btn secondary" id="toggleTheme" type="button" aria-pressed="false" title="Toggle theme">🌓</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container" id="about">
+      <div class="hero-card">
+        <div>
+          <h1 class="headline">Software QA Tester • Automation & API • Cloud Student</h1>
+          <p class="sub">Detail‑oriented tester with 2+ years at Amazon (manual, Android, and automation). Skilled in Selenium (Python), PyTest, API testing, and SQL. Currently pursuing a Post‑Grad in Cloud Computing (AWS • Azure • GCP) at Durham College.</p>
+          <div class="chipbar" aria-label="Key strengths">
+            <span class="chip">Selenium (Python)</span>
+            <span class="chip">PyTest • requests</span>
+            <span class="chip">API Automation</span>
+            <span class="chip">SQL • PostgreSQL</span>
+            <span class="chip">Agile/Scrum</span>
+            <span class="chip">AWS • Azure • GCP</span>
+          </div>
+          <div style="margin-top:14px; display:flex; gap:.6rem; flex-wrap:wrap;">
+            <a class="btn" href="#projects">View Projects</a>
+            <a class="btn secondary" href="assets/Kowshal_Resume.pdf" target="_blank">Download Resume</a>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="contact" role="list">
+              <div role="listitem" title="Phone">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.9.3 1.77.54 2.6a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.48-1.07a2 2 0 0 1 2.11-.45c.83.24 1.7.42 2.6.54A2 2 0 0 1 22 16.92z"/></svg>
+                <span>647‑980‑4119</span>
+              </div>
+              <div role="listitem" title="Email">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+                <a href="mailto:kowzshal@gmail.com">kowzshal@gmail.com</a>
+              </div>
+              <div role="listitem" title="Location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Pickering, ON</span>
+              </div>
+              <div role="listitem" title="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v15H0V8zm7.5 0H12v2.2h.1c.6-1.1 2.1-2.2 4.3-2.2 4.6 0 5.4 3 5.4 6.9V23H17v-6.6c0-1.6-.03-3.7-2.3-3.7-2.3 0-2.7 1.8-2.7 3.6V23H7.5V8z"/></svg>
+                <a href="https://www.linkedin.com/in/kowshal1997/" target="_blank" rel="noopener">LinkedIn</a>
+              </div>
+              <div role="listitem" title="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.9 5.33.9 11.6c0 4.88 3.17 9.02 7.56 10.48.55.1.76-.23.76-.52 0-.26-.01-1.12-.02-2.03-3.07.67-3.72-1.31-3.72-1.31-.5-1.26-1.21-1.6-1.21-1.6-.99-.67.08-.66.08-.66 1.1.08 1.68 1.13 1.68 1.13.98 1.68 2.57 1.2 3.2.92.1-.71.38-1.2.69-1.48-2.45-.28-5.02-1.22-5.02-5.44 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.41.11-2.94 0 0 .93-.3 3.05 1.13.88-.25 1.82-.38 2.76-.38s1.88.13 2.76.38c2.13-1.43 3.06-1.13 3.06-1.13.6 1.53.22 2.66.11 2.94.7.77 1.13 1.75 1.13 2.95 0 4.23-2.58 5.16-5.04 5.44.39.33.74.98.74 1.98 0 1.43-.01 2.58-.01 2.93 0 .29.2.63.77.52 4.37-1.47 7.55-5.61 7.55-10.48C23.1 5.33 18.27.5 12 .5z"/></svg>
+                <a href="#" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container anchor" id="experience">
+      <h2 class="section-title">Experience</h2>
+      <div class="card">
+        <h3>Senior Quality Services Associate — Amazon Development Pvt Ltd</h3>
+        <div class="meta">Chennai, India • Apr 2021 – Mar 2023</div>
+        <ul class="list">
+          <li>Performed rigorous manual and Android testing across products including Amazon Prime, Amazon Kids+, VSAR, and Lidar.</li>
+          <li>Developed and documented detailed test plans, regression suites, and integration testing to ensure high product reliability.</li>
+          <li>Identified and logged 100+ software bugs in SIM and Asana, reducing defect leakage and improving customer satisfaction.</li>
+          <li>Collaborated in Agile Scrum teams, providing user‑centric feedback during sprint reviews and stand‑ups.</li>
+          <li>Assisted in automation test scripts (Python, Selenium, API validation) to improve regression coverage.</li>
+          <li>Installed and configured test environments (devices, simulators, builds) to validate features.</li>
+          <li>Contributed to documentation of QA processes and testing standards to ensure consistency and compliance.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="container anchor" id="projects">
+	<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kowshal Sugunarajah • QA Tester & Cloud Student</title>
+  <meta name="description" content="Portfolio & resume website for Kowshal Sugunarajah — Software QA Tester with Amazon experience; Selenium (Python), API automation, SQL; Cloud student at Durham College (AWS, Azure, GCP)." />
+  <meta name="author" content="Kowshal Sugunarajah" />
+  <!-- keep your styles and scripts -->
+</head>
+<body>
+  <!-- ... other sections (header, hero, etc.) ... -->
+
+  <section class="container anchor" id="projects">
+      <h2 class="section-title">Projects</h2>
+
+      <!-- Cloud Projects -->
+      <div class="card" style="margin-bottom:16px">
+        <h3 style="margin:0 0 8px">🌩️ Cloud Projects</h3>
+        <div class="grid two">
+          <div class="card">
+            <h3>Oshawa Public Library Cloud Architecture
+              <a href="https://github.com/kowshal97/Oshawa-Public-Library-Cloud-Architecture" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
+            </h3>
+            <p class="meta">AWS • ECS • RDS • S3 • CloudWatch • Auto Scaling</p>
+            <ul class="list">
+              <li>Designed a secure VPC (public/private subnets, NAT, IGW) and deployed containerized services on ECS connected to RDS (PostgreSQL).</li>
+              <li>Implemented ALB routing, autoscaling policies, and CloudWatch dashboards/alarms to achieve high availability and observability.</li>
+              <li>Documented architecture diagram, deployment steps, and failover testing.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Cloud-project-PostgreSQL-Connection
+              <a href="https://github.com/kowshal97/cloud-project-PostgreSQL-Connection" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
+            </h3>
+            <p class="meta">AWS • Azure • GCP • PostgreSQL • pgAdmin</p>
+            <ul class="list">
+              <li>Created managed PostgreSQL instances across clouds and connected securely using pgAdmin and SSH tunneling.</li>
+              <li>Compared backup/recovery options and access models across providers.</li>
+              <li>Produced connection guides and validation queries.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>AWS Cloud Deployment
+              <a href="https://github.com/kowshal97/AWS-Cloud-Deployment" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
+            </h3>
+            <p class="meta">VPC • ALB • Auto Scaling • Aurora PostgreSQL • DR Testing</p>
+            <ul class="list">
+              <li>Built a production-style 3-tier architecture with ASG (min 2, max 5) behind an ALB.</li>
+              <li>Deployed Aurora PostgreSQL with snapshots and simulated recovery to validate RTO/RPO.</li>
+              <li>Hardened security groups and IAM roles; documented costs and scaling behavior.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Multi-Cloud Web Application Deployment
+              <a href="https://github.com/kowshal97/Multi-Cloud-Web-Server-Deployment" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
+            </h3>
+            <p class="meta">AWS • Azure • GCP • Load Balancers • HA & Latency Tests</p>
+            <ul class="list">
+              <li>Deployed identical Linux web servers and load balancers across AWS, Azure, and GCP.</li>
+              <li>Measured latency, availability, and scaling; compared multi-cloud trade-offs.</li>
+              <li>Wrote runbooks for rollout, rollback, and cross-cloud validation.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Database Projects -->
+      <div class="card" style="margin-bottom:16px">
+        <h3 style="margin:0 0 8px">🗄️ Database Projects</h3>
+        <div class="grid two">
+          <div class="card">
+            <h3>Clinic Management Database
+              <a href="https://github.com/kowshal97/clinic-management-database" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
+            </h3>
+            <p class="meta">PostgreSQL • DynamoDB • ERD • SQL • AWS RDS</p>
+            <ul class="list">
+              <li>Designed ERD covering patients, doctors, appointments, prescriptions, and billing.</li>
+              <li>Implemented normalized PostgreSQL schema, constraints, triggers, sample data, and reporting views.</li>
+              <li>Deployed to RDS and complemented with DynamoDB for key-value access patterns.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Online Retail Store Database
+              <a href="https://github.com/kowshal97/Online-Retail-Store-database" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
+            </h3>
+            <p class="meta">PostgreSQL • SQL • Indexing • Reporting</p>
+            <ul class="list">
+              <li>Modeled products, inventory, orders, payments, shipping, and customers.</li>
+              <li>Wrote stored queries and reports (top sellers, revenue, cohort analysis) with indexes for performance.</li>
+              <li>Included seed data and validation scripts for repeatable demos.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Database Design Project Portfolio
+              <a href="https://github.com/kowshal97/Database-design-project-" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
+            </h3>
+            <p class="meta">ER Modeling • Normalization (1NF→3NF) • SQL Implementation</p>
+            <ul class="list">
+              <li>End-to-end database design exercises across multiple domains (library, college, retail).</li>
+              <li>Translated conceptual and logical models into physical schemas with constraints and relationships.</li>
+              <li>Provided documentation and diagrams for each design iteration.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Automation Testing Projects -->
+      <div class="card">
+        <h3 style="margin:0 0 8px">🧪 Automation Testing Projects</h3>
+        <div class="grid two">
+          <div class="card">
+            <h3>Selenium Automation Suite
+              <a href="https://github.com/kowshal97/Automation-Project-New-User-Signup" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
+            </h3>
+            <p class="meta">Selenium WebDriver (Python) • Page Object Model • WebDriverWait</p>
+            <ul class="list">
+              <li>Automated user signup, login, and account creation flows on AutomationExercise.com.</li>
+              <li>Implemented POM structure, explicit waits, and robust locators for stability.</li>
+              <li>Added logging and screenshots on failure for fast debugging.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>API Automation Framework
+              <a href="https://github.com/kowshal97/API-Automation-Framework" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
+            </h3>
+            <p class="meta">Python • PyTest • requests • HTML Report</p>
+            <ul class="list">
+              <li>Built reusable API test suite validating status codes, payload schema, and error handling for ReqRes & JSONPlaceholder.</li>
+              <li>Parameterized data and assertions; produced concise console and HTML reports.</li>
+              <li>Structured fixtures and markers to scale tests across endpoints.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- ... other sections (skills, education, contact, footer, etc.) ... -->
+</body>
+</html>
+
+
+
+    <section class="container anchor" id="skills">
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="skillgrid">
+        <div class="skill"><h4>Testing</h4><div>Manual • Regression • Functional • Integration • Android Testing</div></div>
+        <div class="skill"><h4>Automation Tools</h4><div>Selenium (Python) • PyTest • Postman • Android Studio Emulator • API Testing • requests • JSON</div></div>
+        <div class="skill"><h4>Programming</h4><div>Python • Java (basic) • SQL • Bash</div></div>
+        <div class="skill"><h4>Databases</h4><div>PostgreSQL • MySQL • MongoDB • DynamoDB</div></div>
+        <div class="skill"><h4>Cloud</h4><div>AWS • Azure • GCP</div></div>
+        <div class="skill"><h4>Tools</h4><div>JIRA • Asana • TestRail • SIM • Charles Proxy</div></div>
+        <div class="skill"><h4>Methods</h4><div>Agile • Scrum • SDLC • Test Plan & Test Case Design</div></div>
+      </div>
+    </section>
+
+    <section class="container anchor" id="education">
+      <h2 class="section-title">Education</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Postgraduate Certificate in Cloud Computing</h3>
+          <div class="meta">Durham College, Oshawa, ON • 2025 – Present</div>
+        </div>
+        <div class="card">
+          <h3>Bachelor of Computer Science Engineering</h3>
+          <div class="meta">Dhanalakshmi College of Engineering, Chennai, India • 2015 – 2019</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container anchor" id="awards">
+      <h2 class="section-title">Awards & Strengths</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Awards</h3>
+          <ul class="list">
+            <li>Best Bug Finder — Amazon Development Pvt Ltd (recognized for identifying critical issues early).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Strengths</h3>
+          <ul class="list">
+            <li><strong>Detail‑Oriented:</strong> Delivered accurate test cases ensuring defect‑free releases.</li>
+            <li><strong>Continuous Learner:</strong> Expanding automation & cloud skills to improve QA contributions.</li>
+            <li><strong>Collaboration:</strong> Team‑first mindset with proactive knowledge sharing.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="container anchor" id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="card">
+        <p>Open to QA opportunities in Ontario. The fastest way to reach me is email.</p>
+        <p><strong>Email:</strong> <a href="mailto:kowzshal@gmail.com">kowzshal@gmail.com</a> &nbsp;•&nbsp; <strong>Phone:</strong> 647‑980‑4119 &nbsp;•&nbsp; <strong>Location:</strong> Pickering, ON</p>
+        <p><strong>Links:</strong> <a href="https://www.linkedin.com/in/kowshal1997/" target="_blank" rel="noopener">LinkedIn</a> • <a href="https://github.com/kowshal97" target="_blank" rel="noopener">GitHub</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>&copy; <span id="y"></span> Kowshal Sugunarajah — Crafted with semantic HTML & modern CSS.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Theme toggle with persistence
+    (function() {
+      const btn = document.getElementById('toggleTheme');
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const start = stored || (prefersDark ? 'dark' : 'light');
+      root.setAttribute('data-theme', start);
+      btn.setAttribute('aria-pressed', String(start === 'dark'));
+      btn.addEventListener('click', () => {
+        const now = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', now);
+        localStorage.setItem('theme', now);
+        btn.setAttribute('aria-pressed', String(now === 'dark'));
+      });
+    })();
+  </script>
+
+  <!-- Structured data for better SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kowshal Sugunarajah",
+    "jobTitle": "Software QA Tester",
+    "email": "mailto:kowzshal@gmail.com",
+    "telephone": "+1-647-980-4119",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Pickering",
+      "addressRegion": "ON",
+      "addressCountry": "CA"
+    },
+    "url": "",
+    "sameAs": [
+      "https://www.linkedin.com/in/kowshal1997/"
+    ],
+    "knowsAbout": [
+      "Selenium (Python)", "PyTest", "API Testing", "SQL", "AWS", "Azure", "GCP"
+    ]
+  }
+  </script>
+</body>
+</html>

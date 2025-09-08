@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1020"/>
+      <stop offset="1" stop-color="#0a142a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="75%" cy="20%" r="60%">
+      <stop offset="0" stop-color="#4f46e5" stop-opacity=".25"/>
+      <stop offset=".6" stop-color="#22c55e" stop-opacity=".15"/>
+      <stop offset="1" stop-color="#0a142a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#g1)"/>
+  <ellipse cx="1150" cy="150" rx="600" ry="300" fill="url(#glow)"/>
+  <!-- abstract cloud shapes -->
+  <g fill="#0e1a37">
+    <ellipse cx="300" cy="640" rx="260" ry="110"/>
+    <ellipse cx="520" cy="650" rx="220" ry="90"/>
+    <ellipse cx="760" cy="660" rx="240" ry="95"/>
+    <ellipse cx="1040" cy="650" rx="260" ry="105"/>
+    <ellipse cx="1320" cy="640" rx="220" ry="100"/>
+  </g>
+  <!-- subtle lines representing network -->
+  <g stroke="#1f2a44" stroke-width="2" opacity=".6">
+    <path d="M120 540 C 200 520, 320 520, 420 540"/>
+    <path d="M420 540 C 520 560, 700 560, 860 540"/>
+    <path d="M860 540 C 1020 520, 1200 520, 1480 540"/>
+  </g>
+  <g fill="#1f2a44" opacity=".9">
+    <circle cx="220" cy="520" r="6"/>
+    <circle cx="420" cy="540" r="6"/>
+    <circle cx="760" cy="560" r="6"/>
+    <circle cx="1120" cy="540" r="6"/>
+    <circle cx="1400" cy="520" r="6"/>
+  </g>
+</svg>
