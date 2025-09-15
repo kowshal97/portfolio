@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+# We'll create a cleaned, updated index.html that removes corner GitHub links
+# and adds "View Repository" + "Quickstart" buttons for every project card
+# based on the user's pasted file. We'll write the whole file to /mnt/data/index.repo-buttons.full.html
+
+html = r"""<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
@@ -45,104 +49,57 @@
       line-height: 1.6;
     }
 
-    /* Layout */
-    .container {
-      width: min(1100px, 92vw);
-      margin-inline: auto;
-    }
-
-    header.site-header {
-      position: sticky;
-      top: 0; z-index: 50;
-      backdrop-filter: saturate(150%) blur(8px);
-      background: color-mix(in oklab, var(--bg) 80%, transparent);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 1rem; height: 64px;
-    }
-    .brand { display:flex; gap:.75rem; align-items:center; font-weight: 700; letter-spacing:.2px; }
+    .container { width: min(1100px, 92vw); margin-inline: auto; }
+    header.site-header { position: sticky; top:0; z-index:50; backdrop-filter:saturate(150%) blur(8px); background: color-mix(in oklab, var(--bg) 80%, transparent); border-bottom:1px solid var(--border); }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:1rem; height:64px; }
+    .brand { display:flex; gap:.75rem; align-items:center; font-weight:700; letter-spacing:.2px; }
     .brand .dot { width:10px; height:10px; border-radius:999px; background: var(--accent); box-shadow: 0 0 0 6px var(--ring); }
-    .nav a { color: var(--text); text-decoration: none; font-weight: 600; opacity:.88; }
-    .nav a:hover { opacity: 1; }
+    .nav a { color: var(--text); text-decoration:none; font-weight:600; opacity:.88; }
+    .nav a:hover { opacity:1; }
     .nav .links { display:flex; gap:1rem; align-items:center; }
 
-    .btn, button.btn {
-      display:inline-flex; align-items:center; gap:.5rem;
-      background: var(--accent);
-      color: white; border: 0; border-radius: 999px; padding: .6rem 1rem; font-weight:700;
-      box-shadow: 0 6px 14px var(--ring); transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
-      cursor:pointer; text-decoration:none;
-    }
+    .btn, button.btn { display:inline-flex; align-items:center; gap:.5rem; background: var(--accent); color:white; border:0; border-radius:999px; padding:.6rem 1rem; font-weight:700; box-shadow:0 6px 14px var(--ring); transition: transform .12s ease, box-shadow .12s ease, background .12s ease; cursor:pointer; text-decoration:none; }
     .btn.secondary { background: var(--panel); color: var(--text); border:1px solid var(--border); box-shadow: var(--shadow); }
     .btn:hover { transform: translateY(-1px); }
     .btn:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
 
-    /* Hero */
-    .hero {
-      padding: 64px 0 36px;
-    }
-    .hero-card {
-      background: linear-gradient(180deg, color-mix(in oklab, var(--card) 90%, transparent), var(--card));
-      border: 1px solid var(--border);
-      border-radius: 18px; padding: 28px; box-shadow: var(--shadow);
-      display:grid; grid-template-columns: 1fr; gap: 18px;
-    }
+    .hero { padding:64px 0 36px; }
+    .hero-card { background: linear-gradient(180deg, color-mix(in oklab, var(--card) 90%, transparent), var(--card)); border:1px solid var(--border); border-radius:18px; padding:28px; box-shadow:var(--shadow); display:grid; grid-template-columns:1fr; gap:18px; }
     .headline { font-size: clamp(28px, 3.2vw, 40px); line-height:1.2; margin:0; }
-    .sub { color: var(--muted); margin: 6px 0 0; font-size: 1.05rem; }
-    .chipbar { display:flex; flex-wrap: wrap; gap:.5rem; margin-top: .75rem; }
-    .chip {
-      background: color-mix(in oklab, var(--accent) 12%, transparent);
-      border: 1px dashed color-mix(in oklab, var(--accent) 40%, var(--border));
-      color: color-mix(in oklab, var(--text) 92%, white);
-      padding:.35rem .6rem; border-radius: 999px; font-size: .85rem; font-weight: 700;
-    }
+    .sub { color: var(--muted); margin:6px 0 0; font-size:1.05rem; }
+    .chipbar { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.75rem; }
+    .chip { background: color-mix(in oklab, var(--accent) 12%, transparent); border:1px dashed color-mix(in oklab, var(--accent) 40%, var(--border)); color: color-mix(in oklab, var(--text) 92%, white); padding:.35rem .6rem; border-radius:999px; font-size:.85rem; font-weight:700; }
 
-    .contact {
-      display:flex; flex-wrap:wrap; gap: .75rem 1.25rem; margin-top: 10px; align-items:center;
-      color: var(--muted);
-    }
+    .contact { display:flex; flex-wrap:wrap; gap:.75rem 1.25rem; margin-top:10px; align-items:center; color: var(--muted); }
     .contact a { color: inherit; text-decoration:none; border-bottom:1px dashed color-mix(in oklab, var(--muted) 60%, transparent); }
-    .contact svg { width: 18px; height: 18px; }
+    .contact svg { width:18px; height:18px; }
 
-    /* Sections */
-    section { padding: 30px 0; }
-    h2.section-title { font-size: clamp(22px, 2.4vw, 28px); margin: 0 0 14px; letter-spacing: .3px; }
+    section { padding:30px 0; }
+    h2.section-title { font-size: clamp(22px, 2.4vw, 28px); margin:0 0 14px; letter-spacing:.3px; }
 
-    .grid {
-      display:grid; gap: 16px;
-    }
+    .grid { display:grid; gap:16px; }
     @media (min-width: 860px) {
       .grid.two { grid-template-columns: 1fr 1fr; }
       .hero-card { grid-template-columns: 2.2fr 1.2fr; align-items:center; }
     }
 
-    .card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 18px; box-shadow: var(--shadow);
-    }
-    .card h3 { margin: 0 0 6px; font-size: 1.05rem; }
-    .meta { color: var(--muted); font-size: .95rem; }
-    .list { margin: 10px 0 0 0; padding-left: 18px; }
-    .list li { margin: .3rem 0; }
+    .card { background: var(--card); border:1px solid var(--border); border-radius:16px; padding:18px; box-shadow:var(--shadow); }
+    .card h3 { margin:0 0 6px; font-size:1.05rem; }
+    .meta { color: var(--muted); font-size:.95rem; }
+    .list { margin:10px 0 0 0; padding-left:18px; }
+    .list li { margin:.3rem 0; }
+    .skillgrid { display:grid; gap:10px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .skillgrid .skill { background: var(--panel); border:1px dashed var(--border); border-radius:12px; padding:12px; }
+    .skillgrid h4 { margin:0 0 6px; font-size:.95rem; color: var(--muted); text-transform:uppercase; letter-spacing:.6px; }
 
-    .skillgrid { display:grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-    .skillgrid .skill { background: var(--panel); border:1px dashed var(--border); border-radius: 12px; padding: 12px; }
-    .skillgrid h4 { margin: 0 0 6px; font-size: .95rem; color: var(--muted); text-transform: uppercase; letter-spacing:.6px; }
+    footer { padding:28px 0 36px; color: var(--muted); }
+    .anchor { scroll-margin-top:90px; }
 
-    /* Footer */
-    footer { padding: 28px 0 36px; color: var(--muted); }
-
-    /* Anchors */
-    .anchor { scroll-margin-top: 90px; }
-
-    /* Print */
     @media print {
-      header.site-header, .btn, .nav { display: none !important; }
-      body { background: white; }
-      .card, .hero-card { box-shadow: none; border: 1px solid #ddd; }
-      a::after { content: " (" attr(href) ")"; font-size: .85em; }
+      header.site-header, .btn, .nav { display:none !important; }
+      body { background:white; }
+      .card, .hero-card { box-shadow:none; border:1px solid #ddd; }
+      a::after { content: " (" attr(href) ")"; font-size:.85em; }
     }
   </style>
 </head>
@@ -234,20 +191,6 @@
     </section>
 
     <section class="container anchor" id="projects">
-	<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kowshal Sugunarajah • QA Tester & Cloud Student</title>
-  <meta name="description" content="Portfolio & resume website for Kowshal Sugunarajah — Software QA Tester with Amazon experience; Selenium (Python), API automation, SQL; Cloud student at Durham College (AWS, Azure, GCP)." />
-  <meta name="author" content="Kowshal Sugunarajah" />
-  <!-- keep your styles and scripts -->
-</head>
-<body>
-  <!-- ... other sections (header, hero, etc.) ... -->
-
-  <section class="container anchor" id="projects">
       <h2 class="section-title">Projects</h2>
 
       <!-- Cloud Projects -->
@@ -255,48 +198,59 @@
         <h3 style="margin:0 0 8px">🌩️ Cloud Projects</h3>
         <div class="grid two">
           <div class="card">
-            <h3>Oshawa Public Library Cloud Architecture
-              <a href="https://github.com/kowshal97/Oshawa-Public-Library-Cloud-Architecture" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
-            </h3>
+            <h3>Oshawa Public Library Cloud Architecture</h3>
             <p class="meta">AWS • ECS • RDS • S3 • CloudWatch • Auto Scaling</p>
             <ul class="list">
               <li>Designed a secure VPC (public/private subnets, NAT, IGW) and deployed containerized services on ECS connected to RDS (PostgreSQL).</li>
               <li>Implemented ALB routing, autoscaling policies, and CloudWatch dashboards/alarms to achieve high availability and observability.</li>
               <li>Documented architecture diagram, deployment steps, and failover testing.</li>
             </ul>
+            <div style="margin-top:10px; display:flex; gap:.5rem; flex-wrap:wrap;">
+              <a class="btn" href="https://github.com/kowshal97/Oshawa-Public-Library-Cloud-Architecture" target="_blank" rel="noopener">View Repository</a>
+              <a class="btn secondary" href="https://github.com/kowshal97/Oshawa-Public-Library-Cloud-Architecture#readme" target="_blank" rel="noopener">Quickstart</a>
+            </div>
           </div>
+
           <div class="card">
-            <h3>Cloud-project-PostgreSQL-Connection
-              <a href="https://github.com/kowshal97/cloud-project-PostgreSQL-Connection" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
-            </h3>
+            <h3>Cloud-project-PostgreSQL-Connection</h3>
             <p class="meta">AWS • Azure • GCP • PostgreSQL • pgAdmin</p>
             <ul class="list">
               <li>Created managed PostgreSQL instances across clouds and connected securely using pgAdmin and SSH tunneling.</li>
               <li>Compared backup/recovery options and access models across providers.</li>
               <li>Produced connection guides and validation queries.</li>
             </ul>
+            <div style="margin-top:10px; display:flex; gap:.5rem; flex-wrap:wrap;">
+              <a class="btn" href="https://github.com/kowshal97/cloud-project-PostgreSQL-Connection" target="_blank" rel="noopener">View Repository</a>
+              <a class="btn secondary" href="https://github.com/kowshal97/cloud-project-PostgreSQL-Connection#readme" target="_blank" rel="noopener">Quickstart</a>
+            </div>
           </div>
+
           <div class="card">
-            <h3>AWS Cloud Deployment
-              <a href="https://github.com/kowshal97/AWS-Cloud-Deployment" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
-            </h3>
+            <h3>AWS Cloud Deployment</h3>
             <p class="meta">VPC • ALB • Auto Scaling • Aurora PostgreSQL • DR Testing</p>
             <ul class="list">
               <li>Built a production-style 3-tier architecture with ASG (min 2, max 5) behind an ALB.</li>
               <li>Deployed Aurora PostgreSQL with snapshots and simulated recovery to validate RTO/RPO.</li>
               <li>Hardened security groups and IAM roles; documented costs and scaling behavior.</li>
             </ul>
+            <div style="margin-top:10px; display:flex; gap:.5rem; flex-wrap:wrap;">
+              <a class="btn" href="https://github.com/kowshal97/AWS-Cloud-Deployment" target="_blank" rel="noopener">View Repository</a>
+              <a class="btn secondary" href="https://github.com/kowshal97/AWS-Cloud-Deployment#readme" target="_blank" rel="noopener">Quickstart</a>
+            </div>
           </div>
+
           <div class="card">
-            <h3>Multi-Cloud Web Application Deployment
-              <a href="https://github.com/kowshal97/Multi-Cloud-Web-Server-Deployment" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
-            </h3>
+            <h3>Multi-Cloud Web Application Deployment</h3>
             <p class="meta">AWS • Azure • GCP • Load Balancers • HA & Latency Tests</p>
             <ul class="list">
               <li>Deployed identical Linux web servers and load balancers across AWS, Azure, and GCP.</li>
               <li>Measured latency, availability, and scaling; compared multi-cloud trade-offs.</li>
               <li>Wrote runbooks for rollout, rollback, and cross-cloud validation.</li>
             </ul>
+            <div style="margin-top:10px; display:flex; gap:.5rem; flex-wrap:wrap;">
+              <a class="btn" href="https://github.com/kowshal97/Multi-Cloud-Web-Server-Deployment" target="_blank" rel="noopener">View Repository</a>
+              <a class="btn secondary" href="https://github.com/kowshal97/Multi-Cloud-Web-Server-Deployment#readme" target="_blank" rel="noopener">Quickstart</a>
+            </div>
           </div>
         </div>
       </div>
@@ -306,37 +260,45 @@
         <h3 style="margin:0 0 8px">🗄️ Database Projects</h3>
         <div class="grid two">
           <div class="card">
-            <h3>Clinic Management Database
-              <a href="https://github.com/kowshal97/clinic-management-database" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
-            </h3>
+            <h3>Clinic Management Database</h3>
             <p class="meta">PostgreSQL • DynamoDB • ERD • SQL • AWS RDS</p>
             <ul class="list">
               <li>Designed ERD covering patients, doctors, appointments, prescriptions, and billing.</li>
               <li>Implemented normalized PostgreSQL schema, constraints, triggers, sample data, and reporting views.</li>
               <li>Deployed to RDS and complemented with DynamoDB for key-value access patterns.</li>
             </ul>
+            <div style="margin-top:10px; display:flex; gap:.5rem; flex-wrap:wrap;">
+              <a class="btn" href="https://github.com/kowshal97/clinic-management-database" target="_blank" rel="noopener">View Repository</a>
+              <a class="btn secondary" href="https://github.com/kowshal97/clinic-management-database#readme" target="_blank" rel="noopener">Quickstart</a>
+            </div>
           </div>
+
           <div class="card">
-            <h3>Online Retail Store Database
-              <a href="https://github.com/kowshal97/Online-Retail-Store-database" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
-            </h3>
+            <h3>Online Retail Store Database</h3>
             <p class="meta">PostgreSQL • SQL • Indexing • Reporting</p>
             <ul class="list">
               <li>Modeled products, inventory, orders, payments, shipping, and customers.</li>
               <li>Wrote stored queries and reports (top sellers, revenue, cohort analysis) with indexes for performance.</li>
               <li>Included seed data and validation scripts for repeatable demos.</li>
             </ul>
+            <div style="margin-top:10px; display:flex; gap:.5rem; flex-wrap:wrap;">
+              <a class="btn" href="https://github.com/kowshal97/Online-Retail-Store-database" target="_blank" rel="noopener">View Repository</a>
+              <a class="btn secondary" href="https://github.com/kowshal97/Online-Retail-Store-database#readme" target="_blank" rel="noopener">Quickstart</a>
+            </div>
           </div>
+
           <div class="card">
-            <h3>Database Design Project Portfolio
-              <a href="https://github.com/kowshal97/Database-design-project-" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
-            </h3>
+            <h3>Database Design Project Portfolio</h3>
             <p class="meta">ER Modeling • Normalization (1NF→3NF) • SQL Implementation</p>
             <ul class="list">
               <li>End-to-end database design exercises across multiple domains (library, college, retail).</li>
               <li>Translated conceptual and logical models into physical schemas with constraints and relationships.</li>
               <li>Provided documentation and diagrams for each design iteration.</li>
             </ul>
+            <div style="margin-top:10px; display:flex; gap:.5rem; flex-wrap:wrap;">
+              <a class="btn" href="https://github.com/kowshal97/Database-design-project-" target="_blank" rel="noopener">View Repository</a>
+              <a class="btn secondary" href="https://github.com/kowshal97/Database-design-project-#readme" target="_blank" rel="noopener">Quickstart</a>
+            </div>
           </div>
         </div>
       </div>
@@ -346,55 +308,49 @@
         <h3 style="margin:0 0 8px">🧪 Automation Testing Projects</h3>
         <div class="grid two">
           <div class="card">
-            <h3>Selenium Automation Suite
-              <a href="https://github.com/kowshal97/Automation-Project-New-User-Signup" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
-            </h3>
+            <h3>Selenium Automation Suite</h3>
             <p class="meta">Selenium WebDriver (Python) • Page Object Model • WebDriverWait</p>
             <ul class="list">
               <li>Automated user signup, login, and account creation flows on AutomationExercise.com.</li>
               <li>Implemented POM structure, explicit waits, and robust locators for stability.</li>
               <li>Added logging and screenshots on failure for fast debugging.</li>
             </ul>
+            <div style="margin-top:10px; display:flex; gap:.5rem; flex-wrap:wrap;">
+              <a class="btn" href="https://github.com/kowshal97/Automation-Project-New-User-Signup" target="_blank" rel="noopener">View Repository</a>
+              <a class="btn secondary" href="https://github.com/kowshal97/Automation-Project-New-User-Signup#readme" target="_blank" rel="noopener">Quickstart</a>
+            </div>
           </div>
+
           <div class="card">
-            <h3>API Automation Framework
-              <a href="https://github.com/kowshal97/API-Automation-Framework" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
-            </h3>
+            <h3>API Automation Framework</h3>
             <p class="meta">Python • PyTest • requests • HTML Report</p>
             <ul class="list">
               <li>Built reusable API test suite validating status codes, payload schema, and error handling for ReqRes & JSONPlaceholder.</li>
               <li>Parameterized data and assertions; produced concise console and HTML reports.</li>
               <li>Structured fixtures and markers to scale tests across endpoints.</li>
             </ul>
+            <div style="margin-top:10px; display:flex; gap:.5rem; flex-wrap:wrap;">
+              <a class="btn" href="https://github.com/kowshal97/API-Automation-Framework" target="_blank" rel="noopener">View Repository</a>
+              <a class="btn secondary" href="https://github.com/kowshal97/API-Automation-Framework#readme" target="_blank" rel="noopener">Quickstart</a>
+            </div>
           </div>
-		  <div class="card">
-			  <h3>Marvel Comics E2E UI Tests
-				<a href="https://github.com/kowshal97/Selenium-Marvel-E2E-Testing" target="_blank" rel="noopener" style="font-size:.9rem; margin-left:.5rem">GitHub ↗</a>
-			  </h3>
-			  <p class="meta">Selenium WebDriver (Python) • Page Object Model • PyTest • WebDriverWait • Reporting</p>
-			  <ul class="list">
-				<li>Automated end-to-end flows on <code>marvel.com/comics</code> (search, filters, navigation, detail views).</li>
-				<li>Stable locators with explicit waits; reusable Page Object Model for maintainability.</li>
-				<li>PyTest fixtures, parametrized tests, and clean console/HTML reports for CI readiness.</li>
-			  </ul>
-			  <div style="margin-top:10px; display:flex; gap:.5rem; flex-wrap:wrap;">
-				<a class="btn" href="https://github.com/kowshal97/Selenium-Marvel-E2E-Testing" target="_blank" rel="noopener">View Repository</a>
-				<!-- Optional: if you have a report artifact in the repo, link it here -->
-				<!-- <a class="btn secondary" href="LINK-TO-HTML-REPORT" target="_blank" rel="noopener">View Test Report</a> -->
-				<!-- Optional: link to README quickstart -->
-				<a class="btn secondary" href="https://github.com/kowshal97/Selenium-Marvel-E2E-Testing#readme" target="_blank" rel="noopener">Quickstart</a>
-			  </div>
-			</div>
 
+          <div class="card">
+            <h3>Marvel Comics E2E UI Tests</h3>
+            <p class="meta">Selenium WebDriver (Python) • Page Object Model • PyTest • WebDriverWait • Reporting</p>
+            <ul class="list">
+              <li>Automated end-to-end flows on <code>marvel.com/comics</code> (search, filters, navigation, detail views).</li>
+              <li>Stable locators with explicit waits; reusable Page Object Model for maintainability.</li>
+              <li>PyTest fixtures, parametrized tests, and clean console/HTML reports for CI readiness.</li>
+            </ul>
+            <div style="margin-top:10px; display:flex; gap:.5rem; flex-wrap:wrap;">
+              <a class="btn" href="https://github.com/kowshal97/Selenium-Marvel-E2E-Testing" target="_blank" rel="noopener">View Repository</a>
+              <a class="btn secondary" href="https://github.com/kowshal97/Selenium-Marvel-E2E-Testing#readme" target="_blank" rel="noopener">Quickstart</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-
-  <!-- ... other sections (skills, education, contact, footer, etc.) ... -->
-</body>
-</html>
-
-
 
     <section class="container anchor" id="skills">
       <h2 class="section-title">Technical Skills</h2>
@@ -460,10 +416,7 @@
   </footer>
 
   <script>
-    // Year
     document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Theme toggle with persistence
     (function() {
       const btn = document.getElementById('toggleTheme');
       const root = document.documentElement;
@@ -481,7 +434,6 @@
     })();
   </script>
 
-  <!-- Structured data for better SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -497,13 +449,16 @@
       "addressCountry": "CA"
     },
     "url": "",
-    "sameAs": [
-      "https://www.linkedin.com/in/kowshal1997/"
-    ],
-    "knowsAbout": [
-      "Selenium (Python)", "PyTest", "API Testing", "SQL", "AWS", "Azure", "GCP"
-    ]
+    "sameAs": ["https://www.linkedin.com/in/kowshal1997/"],
+    "knowsAbout": ["Selenium (Python)", "PyTest", "API Testing", "SQL", "AWS", "Azure", "GCP"]
   }
   </script>
 </body>
 </html>
+"""
+
+out_path = "/mnt/data/index.repo-buttons.full.html"
+with open(out_path, "w", encoding="utf-8") as f:
+    f.write(html)
+
+out_path
